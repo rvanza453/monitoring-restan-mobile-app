@@ -689,13 +689,9 @@ class _PengirimanScreenState extends State<PengirimanScreen>
   }
 
   Widget _buildDataPengirimanTab(DataProvider dataProvider) {
-    // Use master data for blok list to show ALL bloks regardless of filters
-    // This ensures no data is hidden by date/afdeling filters
-    final dataSource = _currentView == PengirimanView.bloks 
-        ? dataProvider.masterPengirimanData.isNotEmpty 
-            ? dataProvider.masterPengirimanData 
-            : dataProvider.pengirimanData
-        : dataProvider.pengirimanData;
+    // Always use filtered data (pengirimanData) to respect all applied filters
+    // This ensures blok list only shows bloks that have matching data
+    final dataSource = dataProvider.pengirimanData;
     
     switch (_currentView) {
       case PengirimanView.bloks:

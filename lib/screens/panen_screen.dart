@@ -734,13 +734,9 @@ class _PanenScreenState extends State<PanenScreen>
   }
 
   Widget _buildDataPanenTab(DataProvider dataProvider) {
-    // Use master data for blok list to show ALL bloks regardless of filters
-    // This ensures no data is hidden by date/afdeling filters
-    final dataSource = _currentView == PanenView.bloks 
-        ? dataProvider.masterPanenData.isNotEmpty 
-            ? dataProvider.masterPanenData 
-            : dataProvider.panenData
-        : dataProvider.panenData;
+    // Always use filtered data (panenData) to respect all applied filters
+    // This ensures blok list only shows bloks that have matching data
+    final dataSource = dataProvider.panenData;
     
     switch (_currentView) {
       case PanenView.bloks:
